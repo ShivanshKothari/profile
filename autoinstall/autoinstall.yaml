@@ -1,0 +1,33 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu-desktop
+    password: "$6$5ZMHO89Qqf6apI5A$.S3SVtwNwyFy5qN4I79Yv8unU0kfRNwDUWJNG/tOCr/h5xG2NfcCRzXstBpJ18CavjiwxboHgOWsr3kpWyWUE/"
+    username: ubuntuuser
+  keyboard:
+    layout: us
+    variant: ""
+  locale: en_US
+  network:
+    ethernets:
+      eth0:
+        dhcp4: true
+    version: 2
+  storage:
+    layout:
+      name: lvm
+  packages:
+    - openssh-server
+    - vim
+  user-data:
+    disable_root: false
+  late-commands:
+    - "curtin in-target --target=/target apt-get install -y open-vm-tools"
+  update:
+    update: true
+  ssh:
+    install-server: true
+    allow-pw: true
+  interactive-sections:
+    - keyboard
